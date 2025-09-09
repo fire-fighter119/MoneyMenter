@@ -1,0 +1,79 @@
+:oot{
+.qr-card img{display:block;width:100%;height:auto;border-radius:12px}
+.qr-card figcaption{font-size:.9rem;color:var(--muted);margin-top:8px}
+.qr-card.big{max-width:320px}
+
+
+/* Section */
+.section{padding:56px 0}
+.section-title{font-size:1.8rem;margin:0 0 14px;color:var(--sage-dark)}
+.two-col{display:grid;grid-template-columns:1fr;gap:20px}
+.note-box{background:#fff;border:1px dashed var(--sage);padding:16px;border-radius:var(--radius);color:#476052}
+.small{font-size:.86rem}
+.center{text-align:center}
+
+
+/* Cards */
+.cards{display:grid;grid-template-columns:1fr;gap:14px;margin-top:18px}
+.card{background:var(--white);border-radius:var(--radius);padding:18px;border:1px solid rgba(0,0,0,.06);box-shadow:var(--shadow)}
+.card h3{margin-top:0;color:#476052}
+
+
+/* Plans */
+.plans{display:grid;grid-template-columns:1fr;gap:16px;margin-top:16px}
+.plan{background:var(--white);border-radius:var(--radius);padding:22px;border:1px solid rgba(0,0,0,.06);box-shadow:var(--shadow);position:relative}
+.plan .badge{position:absolute;top:12px;right:12px;background:#f0f6f2;color:#476052;padding:6px 10px;border-radius:999px;font-size:.8rem;border:1px solid var(--sage)}
+.price{font-weight:800;color:#476052;margin:8px 0 12px}
+.plan ul{padding-left:18px;margin:0 0 14px}
+.plan.popular{border-color:var(--sage)}
+
+
+/* Reviews */
+.reviews{display:grid;grid-template-columns:1fr;gap:16px;margin-top:16px}
+.review{background:var(--white);border:1px solid rgba(0,0,0,.06);box-shadow:var(--shadow);border-radius:var(--radius);padding:16px}
+.review img{width:72px;height:72px;border-radius:50%;object-fit:cover}
+.review blockquote{margin:10px 0;color:var(--ink)}
+.review figcaption{color:var(--muted);font-size:.9rem}
+
+
+/* Form */
+.form{display:flex;gap:10px;justify-content:center;margin-top:12px}
+.form input{flex:1;max-width:380px;padding:12px 14px;border-radius:999px;border:1.5px solid #cfd6d1;background:#fff}
+.form button{white-space:nowrap}
+
+
+/* Contact */
+.contact .two-col{align-items:center}
+.v-center{align-items:center}
+.social{display:flex;gap:12px;margin:12px 0 0;padding:0;list-style:none}
+.social a{text-decoration:none;color:var(--sage-dark);border-bottom:1px solid rgba(110,138,121,.4)}
+
+
+/* Footer */
+.site-footer{padding:28px 0;border-top:1px solid rgba(0,0,0,.06);background:#fff}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.footer-links{display:flex;gap:14px}
+.footer-links a{text-decoration:none;color:var(--muted)}
+
+
+/* Responsive */
+@media (min-width: 760px){
+.nav{display:flex}
+.hero-inner{grid-template-columns:1.2fr .8fr}
+.two-col{grid-template-columns:1.2fr .8fr}
+.cards{grid-template-columns:repeat(3,1fr)}
+.plans{grid-template-columns:repeat(3,1fr)}
+.reviews{grid-template-columns:repeat(3,1fr)}
+.sticky-cta{display:none}
+}
+
+
+/* 追加の装飾（葉っぱの柔らかい背景パターン：後で有効化予定） */
+/*
+body::before{
+content:"";position:fixed;inset:0;pointer-events:none;
+background-image:radial-gradient(20px 12px at 10% 15%, rgba(110,138,121,.06), transparent 60%),
+radial-gradient(18px 10px at 80% 5%, rgba(110,138,121,.05), transparent 60%),
+radial-gradient(22px 12px at 30% 90%, rgba(110,138,121,.05), transparent 60%);
+}
+*/
