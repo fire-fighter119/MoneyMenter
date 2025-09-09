@@ -1,121 +1,168 @@
+/* =========================================
+   Base / Tokens
+========================================= */
 :root{
-  --cream:#F8F5EC;        /* クリーム */
-  --sage:#8BA694;         /* セージ */
-  --sage-dark:#6E8A79;    /* セージ濃 */
-  --ink:#243036;          /* 文字 */
-  --muted:#6B7A74;        /* 補助文字 */
+  --cream:#F8F5EC;            /* 背景 */
+  --sage:#8BA694;             /* メイン */
+  --sage-dark:#6E8A79;        /* メイン濃 */
+  --ink:#243036;              /* 文字 */
+  --muted:#6B7A74;            /* 補助文字 */
   --white:#fff;
-  --radius:20px;
-  --shadow:0 16px 40px rgba(36,48,54,.08);
+  --radius:18px;
+  --shadow:0 14px 36px rgba(36,48,54,.08);
 }
 
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+
 body{
   font-family:"Noto Sans JP", system-ui, -apple-system, Segoe UI, Roboto, Meiryo, sans-serif;
-  color:var(--ink); background:var(--cream); line-height:1.9;
+  color:var(--ink);
+  background:var(--cream);
+  line-height:1.9;
+  -webkit-text-size-adjust:100%;
 }
 
-/* グローバル */
-.container{width:min(1100px,92%); margin-inline:auto}
-.hand-title{font-family:"Dancing Script", cursive; letter-spacing:.4px}
-.muted{color:var(--muted)} .center{text-align:center}
+/* コンテナ：左右の余白をやや広めにして読みやすく */
+.container{width:min(1060px, 92%); margin-inline:auto}
 
-/* ヘッダー */
-.site-header{position:sticky; top:0; z-index:20;
-  background:rgba(248,245,236,.8); backdrop-filter:saturate(120%) blur(6px);
-  border-bottom:1px solid #0001;}
-.header-inner{display:flex; align-items:center; justify-content:space-between; padding:14px 0;}
+/* 見出しはclampでサイズ可変（スマホ→PC） */
+h1,h2,h3{line-height:1.35;margin:0 0 .6em}
+h1{font-size:clamp(1.6rem, 4.8vw, 2.6rem)}
+h2{font-size:clamp(1.3rem, 3.6vw, 1.9rem)}
+h3{font-size:clamp(1.05rem, 2.6vw, 1.2rem)}
+
+.hand-title{font-family:"Dancing Script", cursive; letter-spacing:.3px}
+.muted{color:var(--muted)}
+.center{text-align:center}
+
+/* =========================================
+   Header / Nav
+========================================= */
+.site-header{
+  position:sticky; top:0; z-index:20;
+  background:rgba(248,245,236,.88);
+  backdrop-filter:saturate(120%) blur(6px);
+  border-bottom:1px solid #0001;
+}
+.header-inner{display:flex; align-items:center; justify-content:space-between; padding:12px 0}
 .brand{display:flex; align-items:center; gap:8px}
-.leaf{color:var(--sage)} .brand-name{font-weight:700}
-.nav{display:none; gap:20px}
-.nav a{color:var(--ink); text-decoration:none}
+.brand-name{font-weight:700}
+.leaf{color:var(--sage)}
+.nav{display:none; gap:18px}
+.nav a{text-decoration:none; color:var(--ink)}
 
-/* ボタン */
-.btn{display:inline-flex; align-items:center; justify-content:center; gap:8px;
-  padding:12px 18px; border-radius:999px; font-weight:700; text-decoration:none;
-  border:2px solid transparent; transition:transform .04s ease, box-shadow .2s ease}
-.btn-lg{padding:14px 22px; font-size:1.06rem}
-.btn-primary{background:var(--sage); color:#fff; box-shadow:0 10px 26px rgba(139,166,148,.28)}
-.btn-primary:hover{transform:translateY(-1px); box-shadow:0 16px 36px rgba(139,166,148,.34)}
-.btn-outline{color:var(--sage-dark); border-color:var(--sage); background:transparent}
+/* =========================================
+   Buttons
+========================================= */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:12px 18px; border-radius:999px; font-weight:700;
+  text-decoration:none; border:2px solid transparent;
+  box-shadow:0 8px 22px rgba(139,166,148,.22);
+  transition:transform .04s ease, box-shadow .2s ease, background .2s ease;
+}
+.btn:hover{transform:translateY(-1px); box-shadow:0 12px 28px rgba(139,166,148,.28)}
+.btn-lg{padding:14px 22px; font-size:1.05rem}
+.btn-primary{background:var(--sage); color:#fff}
+.btn-outline{background:transparent; color:var(--sage-dark); border-color:var(--sage)}
 .btn-soft{background:#e8efe9; color:var(--sage-dark)}
 
-/* 追従CTA（スマホ） */
-.sticky-cta{position:sticky; bottom:0; z-index:30; display:flex; gap:10px; justify-content:center;
-  padding:10px; background:linear-gradient(to top, rgba(248,245,236,.96), rgba(248,245,236,.6));
-  border-top:1px solid #0001}
+/* スマホはタップしやすいように幅いっぱいに */
+@media (max-width: 767px){
+  .btn, .btn-lg{width:100%}
+}
 
-/* ヒーロー */
+/* =========================================
+   Sticky CTA（スマホ）
+========================================= */
+.sticky-cta{
+  position:sticky; bottom:0; z-index:30;
+  display:flex; gap:10px; justify-content:center;
+  padding:10px env(safe-area-inset-right) 10px env(safe-area-inset-left);
+  background:linear-gradient(to top, rgba(248,245,236,.96), rgba(248,245,236,.6));
+  border-top:1px solid #0001;
+}
+@media (min-width: 768px){ .sticky-cta{display:none} }
+
+/* =========================================
+   Hero
+========================================= */
 .hero{
-  padding:56px 0 0;
+  padding:48px 0 0;
   background:
-    radial-gradient(900px 500px at 90% -20%, rgba(139,166,148,.18), transparent 60%),
+    radial-gradient(900px 500px at 90% -20%, rgba(139,166,148,.16), transparent 60%),
     radial-gradient(600px 300px at 0% 0%, rgba(139,166,148,.10), transparent 60%);
 }
-.hero-grid{display:grid; grid-template-columns:1fr; gap:28px; align-items:center}
 .eyebrow{font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted)}
-.hero .hand-title{font-size:2.2rem; margin:.2rem 0 1rem}
-.check-list{margin:14px 0 0; padding:0; list-style:none}
-.check-list li{padding-left:1.6em; position:relative; margin:8px 0}
-.check-list li::before{content:"✓"; position:absolute; left:0; top:0; color:var(--sage); font-weight:900}
-.cta-row{display:flex; gap:10px; margin:18px 0 8px}
+.hero .hand-title{margin:.2rem 0 .8rem}
+.check-list{margin:10px 0 0; padding:0; list-style:none}
+.check-list li{position:relative; padding-left:1.6em; margin:6px 0}
+.check-list li::before{content:"✓"; position:absolute; left:0; color:var(--sage); font-weight:900}
 
-.qr-card{max-width:280px; margin-inline:auto; text-align:center;
-  background:#fff; border:1px solid #0001; border-radius:18px; padding:16px; box-shadow:var(--shadow)}
-.qr-card img{display:block; width:100%; height:auto; border-radius:14px}
+.hero-grid{display:grid; grid-template-columns:1fr; gap:22px; align-items:center}
+.qr-card{
+  max-width:320px; margin-inline:auto; text-align:center;
+  background:#fff; border:1px solid #0001; border-radius:18px; padding:16px; box-shadow:var(--shadow)
+}
+.qr-card img{width:100%; border-radius:14px}
 .qr-card figcaption{font-size:.92rem; color:var(--muted); margin-top:8px}
-.qr-card.big{max-width:320px}
+.wave svg{display:block; width:100%; height:80px; fill:#f1f5f2}
 
-.wave svg{display:block; width:100%; height:90px; fill:#f1f5f2}
+/* タブレット以上で2カラムに */
+@media (min-width: 768px){
+  .hero-grid{grid-template-columns:1.2fr .8fr; gap:28px}
+}
 
-/* セクション */
-.section{padding:64px 0}
+/* =========================================
+   Sections
+========================================= */
+.section{padding:56px 0}
 .section-soft{background:#f1f5f2}
-.section-title{font-size:1.9rem; color:var(--sage-dark); margin:0 0 12px}
-.two-col{display:grid; grid-template-columns:1fr; gap:20px}
-.note-box{background:#fff; border:1px dashed var(--sage); color:#476052; padding:18px; border-radius:18px}
+.section-title{color:var(--sage-dark)}
+.two-col{display:grid; grid-template-columns:1fr; gap:18px}
+.note-box{background:#fff; border:1px dashed var(--sage); color:#476052; padding:16px; border-radius:18px}
 
-/* ピル / カード */
-.grid-3{display:grid; grid-template-columns:1fr; gap:12px; margin:16px 0}
-.pill{background:#fff; border:1px solid #0001; border-radius:999px; padding:12px 16px; box-shadow:0 8px 20px rgba(36,48,54,.06)}
+/* タブレット以上で2カラム */
+@media (min-width: 768px){
+  .two-col{grid-template-columns:1.15fr .85fr}
+}
+
+/* お悩みのピル */
+.grid-3{display:grid; grid-template-columns:1fr; gap:12px; margin-top:14px}
+.pill{background:#fff; border:1px solid #0001; border-radius:999px; padding:12px 16px; box-shadow:0 8px 18px rgba(36,48,54,.06)}
+@media (min-width: 768px){ .grid-3{grid-template-columns:repeat(3,1fr)} }
+
+/* サービスカード */
 .cards{display:grid; grid-template-columns:1fr; gap:14px; margin-top:16px}
 .card{background:#fff; border:1px solid #0001; border-radius:18px; padding:18px; box-shadow:var(--shadow)}
 .card h3{margin:.2rem 0 .4rem; color:#476052}
+@media (min-width: 768px){ .cards{grid-template-columns:repeat(2,1fr)} }
+@media (min-width: 1024px){ .cards{grid-template-columns:repeat(4,1fr)} }
 
 /* 引用 */
-.section-quote{background:
-  radial-gradient(700px 320px at 0% 50%, rgba(139,166,148,.08),transparent 60%);}
+.section-quote{background:radial-gradient(700px 320px at 0% 50%, rgba(139,166,148,.08),transparent 60%)}
 .quote{background:#fff; border-left:6px solid var(--sage); border-radius:14px; padding:18px; box-shadow:var(--shadow)}
 
 /* 相談CTA */
-.section-cta{background:
-  radial-gradient(800px 360px at 90% -10%, rgba(139,166,148,.12),transparent 60%);}
+.section-cta{background:radial-gradient(800px 360px at 90% -10%, rgba(139,166,148,.12),transparent 60%)}
 .v-center{align-items:center}
+.cta-col{display:flex; flex-direction:column; gap:14px; margin-top:16px}
+.line-btn img{display:block}
 
-/* フッター */
-.site-footer{border-top:1px solid #0001; background:#fff; padding:28px 0}
-.footer-inner{display:flex; align-items:center; justify-content:space-between; gap:14px}
+/* =========================================
+   Footer
+========================================= */
+.site-footer{border-top:1px solid #0001; background:#fff; padding:26px 0}
+.footer-inner{display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap}
 .footer-links{display:flex; gap:14px}
 .footer-links a{text-decoration:none; color:var(--muted)}
 
-/* レスポンシブ */
-@media (min-width: 760px){
-  .nav{display:flex}
-  .sticky-cta{display:none}
-  .hero-grid{grid-template-columns:1.2fr .8fr}
-  .two-col{grid-template-columns:1.1fr .9fr}
-  .grid-3{grid-template-columns:repeat(3,1fr)}
-  .cards{grid-template-columns:repeat(4,1fr)}
+/* =========================================
+   Desktop enhancements
+========================================= */
+@media (min-width: 1024px){
   .hero .hand-title{font-size:2.6rem}
-}
-/* 縦並びのCTA */
-.cta-col {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;   /* ボタンの間隔 */
-  margin-top: 16px;
-}
-.line-btn img {
-  display: block;
 }
