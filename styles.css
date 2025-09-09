@@ -166,3 +166,21 @@ h3{font-size:clamp(1.05rem, 2.6vw, 1.2rem)}
 @media (min-width: 1024px){
   .hero .hand-title{font-size:2.6rem}
 }
+
+/* 見出しの改行制御 */
+.hero-title{
+  word-break: keep-all;          /* 日本語の“文字単位の分割”を抑える */
+  line-break: strict;
+  text-wrap: balance;            /* 2～3行のバランスを自動調整（対応ブラウザで有効） */
+  max-width: 22ch;               /* 行幅を整えて気持ちよく折り返す */
+  margin-bottom: .6rem;
+}
+.nowrap{ white-space: nowrap; }  /* 「“あなた専属”」は割らない */
+
+/* 画面幅に応じて少し広げる */
+@media (min-width: 768px){
+  .hero-title{ max-width: 26ch; }
+}
+@media (min-width: 1024px){
+  .hero-title{ max-width: 30ch; }
+}
